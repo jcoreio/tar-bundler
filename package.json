@@ -1,9 +1,8 @@
 {
-  "name": "es2015-library-skeleton",
+  "name": "@jcoreio/node-project-skeleton",
   "version": "0.0.0-development",
-  "description": "my personal ES2015 library project skeleton",
+  "description": "skeleton for node.js libraries and projects",
   "main": "index.js",
-  "module": "es/index.js",
   "sideEffects": false,
   "scripts": {
     "lint": "eslint src test --cache",
@@ -16,11 +15,12 @@
     "flow:watch": "flow-watch -e js,js.flow,flowconfig --ignore es/ --ignore node_modules/ --watch .flowconfig --watch src/ --watch test/",
     "clean": "rimraf es lib $(cd src; ls) *.js.flow",
     "build": "npm run clean && babel src --out-dir es && flow-copy-source -v src/ es && cross-env BABEL_ENV=es5 babel src --out-dir . && flow-copy-source -v src/ .",
-    "test": "cross-env NODE_ENV=production BABEL_ENV=es5 mocha $npm_package_config_mocha && cross-env NODE_ENV=production BABEL_ENV=coverage nyc --reporter=lcov --reporter=text mocha $npm_package_config_mocha",
+    "test": "cross-env NODE_ENV=production BABEL_ENV=test mocha $npm_package_config_mocha",
     "test:watch": "cross-env NODE_ENV=production BABEL_ENV=test mocha --watch $npm_package_config_mocha",
     "test:debug": "cross-env NODE_ENV=production BABEL_ENV=test mocha --inspect-brk $npm_package_config_mocha",
+    "coverage": "cross-env NODE_ENV=production BABEL_ENV=coverage nyc --reporter=lcov --reporter=text mocha $npm_package_config_mocha",
     "codecov": "nyc report --reporter=text-lcov > coverage.lcov; codecov",
-    "prepublishOnly": "npm run clean && npm run prettier:check && npm run lint && flow && npm test && npm run build",
+    "prepublishOnly": "npm run clean && npm run prettier:check && npm run lint && flow && npm run coverage && npm run build",
     "open:coverage": "open coverage/lcov-report/index.html",
     "semantic-release": "semantic-release"
   },
@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jedwards1211/es2015-library-skeleton.git"
+    "url": "https://github.com/jcoreio/node-project-skeleton.git"
   },
   "keywords": [
     "es2015"
@@ -73,9 +73,9 @@
   "author": "Andy Edwards",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jedwards1211/es2015-library-skeleton/issues"
+    "url": "https://github.com/jcoreio/node-project-skeleton/issues"
   },
-  "homepage": "https://github.com/jedwards1211/es2015-library-skeleton#readme",
+  "homepage": "https://github.com/jcoreio/node-project-skeleton#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
