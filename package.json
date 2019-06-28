@@ -142,5 +142,8 @@
     "major": {
       "automerge": false
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
